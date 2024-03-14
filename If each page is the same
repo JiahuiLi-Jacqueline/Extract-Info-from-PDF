@@ -1,0 +1,11 @@
+import PyPDF2
+import pandas as pd
+pdf_file = open(r"****.pdf", "rb");
+pdf_reader = PyPDF2.PdfReader(pdf_file)
+data = []
+for i in range(len(pdf_reader.pages)):
+    page = pdf_reader.pages[i]
+    text = page.extract_text().split('\n')[1:9]
+    data.append(text)
+df = pd.DataFrame(data)
+df.to_excel(r"****.xlsx", index=False, header=False)
